@@ -907,6 +907,37 @@
       .unlock-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     }
 
+
+    /* ── Free download banner inside #unlock ── */
+    .free-download-banner {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 0;
+      flex-wrap: wrap;
+    }
+    .fdb-left { flex: 1; min-width: 240px; }
+    .fdb-left h4 { font-family: var(--font-head); font-size: 1.05rem; margin-bottom: 6px; }
+    .fdb-left p  { font-size: .86rem; color: var(--ink-soft); line-height: 1.55; }
+    .fdb-right { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+
+    /* Or divider between download banner and cards */
+    .unlock-or-divider {
+      display: flex; align-items: center; gap: 16px;
+      margin: 32px 0;
+      color: var(--ink-muted); font-size: .82rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .unlock-or-divider::before,
+    .unlock-or-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
   </style>
 </head>
 <body>
@@ -1448,7 +1479,7 @@
             <span class="lock-icon">&#x1F512;</span>
             <h4>Advanced Compliance Templates</h4>
             <p>Full JSON schemas for Annex IV Technical Files, Article 12 logging, dataset cards, and CI/CD validator configs &mdash; ready to drop into your repo.</p>
-            <a href="#cta" class="btn-gold">Get Notified When Available &#x2192;</a>
+            <a href="#unlock" class="btn-gold">Get Premium Access &#x2192;</a>
           </div>
         </div>
       </div>
@@ -1487,7 +1518,7 @@
             <span class="lock-icon">&#x1F512;</span>
             <h4>Art. 12 Logging Schema &mdash; Full Implementation</h4>
             <p>Production-ready event log schema with OpenTelemetry integration, Kafka config, tamper-proof hashing, and a Python export script for authority audits.</p>
-            <a href="#cta" class="btn-gold">Get Notified When Available &#x2192;</a>
+            <a href="#unlock" class="btn-gold">Get Premium Access &#x2192;</a>
           </div>
         </div>
       </div>
@@ -1656,7 +1687,7 @@
               <span class="lock-icon">&#x1F512;</span>
               <h4>Stage 03, 04 &amp; 05 &mdash; Full Detail</h4>
               <p>Implementation, Validation, and Release checkpoints including CI/CD validator configs, ODD coverage evidence templates, conformity assessment checklist, and PMM activation guide.</p>
-              <a href="#cta" class="btn-gold">Get Notified When Available &#x2192;</a>
+              <a href="#unlock" class="btn-gold">Get Premium Access &#x2192;</a>
             </div>
           </div>
         </div>
@@ -1673,7 +1704,7 @@
               <span class="lock-icon">&#x1F512;</span>
               <h4>Stage 04 &mdash; Validation Checkpoints</h4>
               <p>Full detail: ODD coverage evidence, robustness &amp; adversarial testing guide, human oversight verification protocol, and V&amp;V evidence packaging for your notified body.</p>
-              <a href="#cta" class="btn-gold">Get Notified &#x2192;</a>
+              <a href="#unlock" class="btn-gold">Get Access &#x2192;</a>
             </div>
           </div>
         </div>
@@ -1689,7 +1720,7 @@
               <span class="lock-icon">&#x1F512;</span>
               <h4>Stage 05 &mdash; Release Gate</h4>
               <p>Full conformity assessment checklist, EU database registration walkthrough, post-market monitoring activation guide, and a Declaration of Conformity template.</p>
-              <a href="#cta" class="btn-gold">Get Notified &#x2192;</a>
+              <a href="#unlock" class="btn-gold">Get Access &#x2192;</a>
             </div>
           </div>
         </div>
@@ -1774,7 +1805,7 @@
                 </div>
               </div>
               <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,251,235,.88);">
-                <a href="#cta" class="btn-gold" style="font-size:.8rem;padding:8px 16px;">&#x1F512; Unlock Config &#x2192;</a>
+                <a href="#unlock" class="btn-gold" style="font-size:.8rem;padding:8px 16px;">&#x1F512; Unlock Config &#x2192;</a>
               </div>
             </div>
           </div>
@@ -2072,75 +2103,6 @@
   </section>
 
   <!-- ════════════════════════════════════════════
-       CTA SECTION — Free Download + Premium Notify
-       Formspree: https://formspree.io/f/mgonkvnn
-       Contact:   hello@keithan.eu
-  ════════════════════════════════════════════ -->
-  <section id="cta">
-    <div class="container">
-      <div class="cta-grid reveal">
-
-        <!-- LEFT: Free download -->
-        <div class="cta-free">
-          <div style="margin-bottom:12px;"><span class="tier-badge tier-free" style="font-size:.75rem;">&#x2713; Free Edition</span></div>
-          <h3>Download the Free Playbook</h3>
-          <p>Get this complete interactive HTML file &mdash; all 6 sections, risk table, RACI matrix, and split comparison &mdash; works offline, no dependencies.</p>
-          <div class="download-card">
-            <span class="dl-icon">&#x1F4C4;</span>
-            <div class="dl-info">
-              <h4>AI Governance Playbook for ADAS Teams</h4>
-              <p>HTML &middot; Free &middot; Works offline &middot; No sign-up required</p>
-            </div>
-          </div>
-          <button class="btn-download" onclick="downloadPlaybook()">&#x2193; Download Free Version</button>
-          <p style="font-size:.75rem; color:#556677; margin-top:12px;">
-            Share this page: <span class="mono" style="color:#7fb4ff; font-size:.75rem;">keithan.eu/playbook</span>
-          </p>
-        </div>
-
-        <!-- RIGHT: Premium notify -->
-        <div class="cta-premium">
-          <div style="margin-bottom:12px;"><span class="tier-badge tier-premium" style="font-size:.75rem;">&#x1F512; Premium Edition</span></div>
-          <h3>Get <span>Premium Access</span> When It Launches</h3>
-          <p>The premium edition includes everything in the free version, plus production-ready compliance infrastructure your team can deploy in a 21-day sprint.</p>
-          <ul class="premium-features">
-            <li><span class="pf-icon">&#x1F4D0;</span>Annex IV Technical File JSON Schema (version-controlled)</li>
-            <li><span class="pf-icon">&#x1F4E1;</span>Article 12 Logging Schema &mdash; OpenTelemetry + Kafka implementation</li>
-            <li><span class="pf-icon">&#x2699;&#xFE0F;</span>CI/CD Compliance Validator &mdash; GitHub Actions &amp; GitLab CI configs</li>
-            <li><span class="pf-icon">&#x1F4C4;</span>Automated documentation generator (Python) from ALM data</li>
-            <li><span class="pf-icon">&#x1F5FA;&#xFE0F;</span>Governance Stages 03&ndash;05 full detail: Implementation, Validation, Release</li>
-            <li><span class="pf-icon">&#x1F4CB;</span>Conformity assessment checklist + Declaration of Conformity template</li>
-          </ul>
-          <div id="emailFormWrap">
-            <div class="email-form">
-              <input type="email" id="emailInput" class="email-input" placeholder="your.name&#64;company.com" aria-label="Email address" />
-              <button class="btn-gold" onclick="handleEmailSubmit()">&#x1F514; Notify Me</button>
-            </div>
-            <p class="form-note">No spam. One email when premium launches. Unsubscribe anytime.</p>
-          </div>
-          <div class="form-confirm" id="formConfirm">
-            <span style="font-size:1.5rem;">&#x2705;</span>
-            <span class="form-confirm-text">You're on the list. We'll email you when the premium edition is available.</span>
-          </div>
-          <div class="alert alert-gold" style="margin-top:20px; border-radius:var(--radius);">
-            <span class="alert-icon">&#x1F4BC;</span>
-            <div>
-              <strong>Need compliance infrastructure now?</strong><br/>
-              <span style="font-size:.84rem;">
-                LXD Advisory runs a 21-day production sprint delivering your Article 12/19 JSON schemas,
-                Technical File, and CI/CD validators &mdash; version-controlled, ready for your notified body.
-                <a href="mailto&#58;hello&#64;keithan&#46;eu" style="color:#f59e0b; font-weight:700;">Book a 15-minute call &#x2192;</a>
-              </span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
        UNLOCK PREMIUM SECTION
        Three pathways: Email capture, Buy, Consult
        Stripe:   https://buy.stripe.com/3cIdRbdwsfNmfsD1dX87K00
@@ -2155,10 +2117,29 @@
         <div class="label">Ready to Comply?</div>
         <h2>Unlock <em>Premium</em> Playbook Access</h2>
         <p>
-          Choose how you want to get started &mdash; get instant access to full EU AI Act
-          checklists, templates, and governance frameworks, or book a session to implement
-          them with expert guidance.
+          Choose how you want to get started &mdash; instant access to full EU AI Act
+          checklists, templates, and governance frameworks, or book a session to
+          implement them with expert guidance.
         </p>
+      </div>
+
+      <!-- Free download banner -->
+      <div class="free-download-banner reveal">
+        <div class="fdb-left">
+          <span class="tier-badge tier-free" style="margin-left:0; margin-bottom:8px; display:inline-flex;">&#x2713; Free Edition</span>
+          <h4>Download the Free Playbook</h4>
+          <p>This complete interactive HTML file &mdash; all 6 sections, risk table, RACI matrix, split comparison. Works offline. No sign-up required.</p>
+        </div>
+        <div class="fdb-right">
+          <button class="btn-download" onclick="downloadPlaybook()" style="white-space:nowrap;">&#x2193; Download Free Version</button>
+          <p style="font-size:.74rem; color:var(--ink-muted); margin-top:8px; text-align:center;">
+            Share: <a href="https://lxdadvisory.de" target="_blank" rel="noopener" style="color:var(--blue); font-family:var(--font-mono); font-size:.74rem;">lxdadvisory.de</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="unlock-or-divider reveal">
+        <span>Or choose a premium pathway below</span>
       </div>
 
       <!-- Three pathway cards -->
@@ -2236,9 +2217,9 @@
           <div class="unlock-icon">&#x1F4C5;</div>
           <h3>Book a Strategy Session</h3>
           <p>
-            Unlock Premium and book a 30-minute session to implement AI governance
-            for your ADAS team &mdash; tailored to your stack, timeline, and
-            August 2026 deadline.
+            Book a free 30-minute gap analysis session to map your ADAS team's
+            EU AI Act obligations &mdash; tailored to your stack, timeline, and
+            the August 2026 enforcement deadline.
           </p>
           <ul class="unlock-features">
             <li>30-minute 1:1 with Keithan</li>
@@ -2255,7 +2236,7 @@
             &#x1F4C5; Book a Session &#x2192;
           </a>
           <p style="font-size:.74rem; color:var(--ink-muted); text-align:center; margin-top:10px;">
-            Free 30-minute session &middot; No commitment
+Free &middot; No commitment required
           </p>
         </div>
 
@@ -2268,7 +2249,7 @@
           Upgrade anytime for full access &#x2192;
         </a>
         &nbsp;&middot;&nbsp;
-        Questions? <a href="mailto&#58;hello&#64;keithan&#46;eu">hello&#64;keithan.eu</a>
+        Questions? <a href="mailto&#58;hello&#64;keithan&#46;eu">hello&#64;keithan.eu</a> &nbsp;&middot;&nbsp; <a href="https://lxdadvisory.de" target="_blank" rel="noopener">lxdadvisory.de</a>
       </p>
 
     </div>
@@ -2282,7 +2263,7 @@
       <div class="footer-top">
         <div>
           <div class="footer-brand">AI Governance Playbook · ADAS Teams</div>
-          <div style="font-size:.78rem; margin-top:4px; color:#556677;">By LXD Advisory &middot; Ingolstadt, Bavaria &middot; <a href="https://keithan.eu" target="_blank" rel="noopener" style="color:#7fb4ff;">keithan.eu</a></div>
+          <div style="font-size:.78rem; margin-top:4px; color:#556677;">By LXD Advisory &middot; Ingolstadt, Bavaria &middot; <a href="https://lxdadvisory.de" target="_blank" rel="noopener" style="color:#7fb4ff;">lxdadvisory.de</a></div>
         </div>
         <div class="footer-links">
           <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener">EU AI Act Full Text</a>
@@ -2415,53 +2396,7 @@
     progressFills.forEach(function(fill) { progressObserver.observe(fill); });
 
 
-    /* ─────────────────────────────────────────────
-       6. EMAIL FORM — Formspree (https://formspree.io/f/mgonkvnn)
-          Submissions delivered to hello@keithan.eu
-    ───────────────────────────────────────────── */
-    function handleEmailSubmit() {
-      var emailInput = document.getElementById('emailInput');
-      var emailVal   = emailInput.value.trim();
-      var btn        = document.querySelector('#emailFormWrap .btn-gold');
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-        emailInput.style.borderColor = 'var(--red)';
-        emailInput.focus();
-        setTimeout(function() { emailInput.style.borderColor = ''; }, 2000);
-        return;
-      }
-
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
-
-      fetch('https://formspree.io/f/mgonkvnn', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body:    JSON.stringify({ email: emailVal, source: 'AI Governance Playbook — Premium Notify' })
-      })
-      .then(function(res) {
-        if (res.ok) {
-          document.getElementById('emailFormWrap').style.display = 'none';
-          document.getElementById('formConfirm').classList.add('visible');
-        } else {
-          btn.innerHTML = '&#x1F514; Notify Me';
-          btn.disabled = false;
-          emailInput.style.borderColor = 'var(--red)';
-        }
-      })
-      .catch(function() {
-        btn.innerHTML = '&#x1F514; Notify Me';
-        btn.disabled = false;
-        emailInput.style.borderColor = 'var(--red)';
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var inp = document.getElementById('emailInput');
-      if (inp) inp.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') handleEmailSubmit();
-      });
-    });
+    /* EMAIL FORM: handled by handleUnlockEmail() in section 8 below */
 
     /* ─────────────────────────────────────────────
        8. UNLOCK PREMIUM — inline email capture (Card 1)
