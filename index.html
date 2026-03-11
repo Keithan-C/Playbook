@@ -1894,15 +1894,15 @@
         <div class="cta-free">
           <div style="margin-bottom:12px;"><span class="tier-badge tier-free" style="font-size:.75rem;">&#x2713; Free Edition</span></div>
           <h3>Download the Free Playbook</h3>
-          <p>Get this complete PDF version &mdash; all 6 sections, risk table, RACI matrix, and split comparison &mdash; ready for your team meeting or sprint planning session.</p>
+          <p>Get this complete interactive HTML file &mdash; all 6 sections, risk table, RACI matrix, and split comparison &mdash; works offline, no dependencies.</p>
           <div class="download-card">
             <span class="dl-icon">&#x1F4C4;</span>
             <div class="dl-info">
               <h4>AI Governance Playbook for ADAS Teams</h4>
-              <p>HTML &middot; Free &middot; No sign-up required</p>
+              <p>HTML &middot; Free &middot; Works offline &middot; No sign-up required</p>
             </div>
           </div>
-          <a href="ai-governance-playbook-v2.html" class="btn-download" download>&#x2193; Download Free Version</a>
+          <button class="btn-download" onclick="downloadPlaybook()">&#x2193; Download Free Version</button>
           <p style="font-size:.75rem; color:#556677; margin-top:12px;">
             Share this page: <span class="mono" style="color:#7fb4ff; font-size:.75rem;">keithan.eu/playbook</span>
           </p>
@@ -2137,6 +2137,25 @@
         if (e.key === 'Enter') handleEmailSubmit();
       });
     });
+
+    /* ─────────────────────────────────────────────
+       7. SELF-DOWNLOAD
+       Grabs the current page's HTML and triggers a
+       browser download — works locally and on GitHub Pages
+    ───────────────────────────────────────────── */
+    function downloadPlaybook() {
+      var html    = document.documentElement.outerHTML;
+      var blob    = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
+      var url     = URL.createObjectURL(blob);
+      var link    = document.createElement('a');
+      link.href       = url;
+      link.download   = 'ai-governance-playbook-adas-eu-ai-act.html';
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
 
   </script>
 
