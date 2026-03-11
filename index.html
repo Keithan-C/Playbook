@@ -7,7 +7,7 @@
   <!--
   ═══════════════════════════════════════════════════════════════════
   AI GOVERNANCE PLAYBOOK FOR ADAS TEAMS — v2.0
-  LXD Advisory · lxdadvisory.de
+  LXD Advisory · keithan.eu
   
   FREE SECTIONS  (publicly accessible):
     - Hero / Landing
@@ -1684,7 +1684,7 @@
             ↓ Download Free PDF
           </a>
           <p style="font-size:.75rem; color:#556677; margin-top:12px;">
-            Or share this page directly: <span class="mono" style="color:#7fb4ff; font-size:.75rem;">lxdadvisory.de/playbook</span>
+            Or share this page directly: <span class="mono" style="color:#7fb4ff; font-size:.75rem;">keithan.eu/playbook</span>
           </p>
         </div>
 
@@ -1740,7 +1740,7 @@
               <span style="font-size:.84rem;">
                 LXD Advisory runs a 21-day production sprint delivering your Article 12/19 JSON schemas,
                 Technical File, and CI/CD validators — version-controlled, ready for your notified body.
-                <a href="mailto:hello@lxdadvisory.de" style="color:var(--gold); font-weight:700;">Book a 15-minute call →</a>
+                <a href="mailto:hello@keithan.eu" style="color:var(--gold); font-weight:700;">Book a 15-minute call →</a>
               </span>
             </div>
           </div>
@@ -1759,14 +1759,14 @@
         <div>
           <div class="footer-brand">AI Governance Playbook · ADAS Teams</div>
           <div style="font-size:.78rem; margin-top:4px; color:#556677;">
-            By <a href="https://lxdadvisory.de" target="_blank" rel="noopener" style="color:#7fb4ff;">LXD Advisory</a> · Ingolstadt, Bavaria
+            By <a href="https://keithan.eu" target="_blank" rel="noopener" style="color:#7fb4ff;">LXD Advisory</a> · Ingolstadt, Bavaria
           </div>
         </div>
         <div class="footer-links">
           <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener">EU AI Act Full Text</a>
           <a href="https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence" target="_blank" rel="noopener">EC AI Policy</a>
           <a href="https://www.iso.org/standard/77490.html" target="_blank" rel="noopener">ISO 21448 (SOTIF)</a>
-          <a href="mailto:hello@lxdadvisory.de">Contact</a>
+          <a href="mailto:hello@keithan.eu">Contact</a>
         </div>
       </div>
       <div class="footer-note">
@@ -1786,7 +1786,7 @@
   <!-- ════════════════════════════════════════════
        JAVASCRIPT
   ════════════════════════════════════════════ -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* ─────────────────────────────────────────────
        1. COLLAPSIBLE TOOL SECTIONS
     ───────────────────────────────────────────── */
@@ -1891,15 +1891,14 @@
     progressFills.forEach(function(fill) { progressObserver.observe(fill); });
 
     /* ─────────────────────────────────────────────
-       6. EMAIL FORM SUBMIT
-       Replace the alert() with your actual form
-       handler (Mailchimp, ConvertKit, Loops, etc.)
-       The endpoint below is a placeholder — swap it
-       for your own form handler or mailing list API.
+       6. EMAIL FORM SUBMIT — Formspree integration
+       Endpoint: https://formspree.io/f/mgonkvnn
+       Submissions go to hello@keithan.eu
     ───────────────────────────────────────────── */
     function handleEmailSubmit() {
       const emailInput = document.getElementById('emailInput');
       const emailVal = emailInput.value.trim();
+      const btn = document.querySelector('#emailFormWrap .btn-gold');
 
       // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1910,23 +1909,36 @@
         return;
       }
 
-      // ── SWAP THIS FOR YOUR MAILING LIST ENDPOINT ──
-      // e.g. Mailchimp embed, ConvertKit API call, Loops.so, etc.
-      // For now, we just show the confirmation UI.
-      console.log('Email captured:', emailVal); // Remove in production
+      // Show loading state
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
 
-      // Show confirm, hide form
-      document.getElementById('emailFormWrap').style.display = 'none';
-      const confirm = document.getElementById('formConfirm');
-      confirm.classList.add('visible');
+      // Submit to Formspree
+      fetch('https://formspree.io/f/mgonkvnn', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email: emailVal, source: 'AI Governance Playbook — Premium Notify' })
+      })
+      .then(function(response) {
+        if (response.ok) {
+          // Success: hide form, show confirmation
+          document.getElementById('emailFormWrap').style.display = 'none';
+          document.getElementById('formConfirm').classList.add('visible');
+        } else {
+          // Server error: reset button, show inline error
+          btn.textContent = '🔔 Notify Me';
+          btn.disabled = false;
+          emailInput.style.borderColor = 'var(--red)';
+          emailInput.placeholder = 'Something went wrong — try again';
+        }
+      })
+      .catch(function() {
+        // Network error
+        btn.textContent = '🔔 Notify Me';
+        btn.disabled = false;
+        emailInput.style.borderColor = 'var(--red)';
+        emailInput.placeholder = 'Network error — try again';
+      });
     }
 
-    // Allow enter key in email field
-    document.getElementById('emailInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') handleEmailSubmit();
-    });
-
-  </script>
-
-</body>
-</html>
+    // Allow ent
