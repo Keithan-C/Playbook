@@ -1223,6 +1223,127 @@
       footer { font-size: 8pt; color: #666; border-top: 0.5pt solid #e0e0e0; padding-top: 8pt; margin-top: 16pt; }
     }
 
+
+    /* ══════════════════════════════════════════════
+       QUICK-QUESTION CARD  [lead capture v2]
+    ══════════════════════════════════════════════ */
+    .quick-q-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      margin: 28px 0 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .quick-q-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), #7c3aed);
+    }
+    .quick-q-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .quick-q-body { flex: 1; }
+    .quick-q-body h3 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      font-family: var(--font-head);
+    }
+    .quick-q-body > p {
+      font-size: .88rem;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+    .quick-q-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .qq-option {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 14px;
+      font-size: .83rem;
+      font-family: var(--font-body);
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all .15s;
+      text-align: left;
+      line-height: 1.35;
+    }
+    .qq-option:hover  { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+    .qq-option.selected { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); font-weight: 600; }
+    .qq-email-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 560px;
+    }
+    .qq-email-row input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: .88rem;
+      font-family: var(--font-body);
+      background: var(--surface);
+      color: var(--ink);
+      outline: none;
+      transition: border-color .15s;
+    }
+    .qq-email-row input[type="email"]:focus { border-color: var(--blue); }
+    .btn-qq-submit {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: .88rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .btn-qq-submit:hover { background: #1558d0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,110,245,.3); }
+    .btn-qq-submit:disabled { background: var(--ink-muted); cursor: not-allowed; transform: none; box-shadow: none; }
+    .qq-confirm {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--green-pale);
+      border-radius: 8px;
+      font-size: .88rem;
+      color: var(--green);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+    .qq-confirm.visible { display: flex; }
+    .qq-note {
+      font-size: .74rem;
+      color: var(--ink-muted);
+      margin-top: 10px;
+    }
+    @media (max-width: 640px) {
+      .quick-q-card { flex-direction: column; gap: 16px; padding: 24px 20px; }
+      .qq-email-row { flex-direction: column; }
+      .qq-email-row input[type="email"], .btn-qq-submit { width: 100%; }
+    }
+
   </style>
 </head>
 <body>
@@ -2415,6 +2536,48 @@
         </div>
       </div>
 
+      <!-- ═══════════════════════════════════════
+           QUICK QUESTION — lead capture card
+      ═══════════════════════════════════════ -->
+      <div class="quick-q-card reveal" id="quickQ">
+        <div class="quick-q-icon">💬</div>
+        <div class="quick-q-body">
+          <h3 data-i18n="qq_title">Quick question before you go</h3>
+          <p data-i18n="qq_sub">What's your team's biggest EU AI Act compliance gap right now? Drop your answer and email — I'll send you a specific resource or note back within 24 hours.</p>
+
+          <div class="quick-q-options" id="qqOptions">
+            <button class="qq-option" onclick="selectGap(this)" data-val="Technical File / Annex IV documentation">
+              <span data-i18n="qq_o1">📁 Technical File / Annex IV documentation</span>
+            </button>
+            <button class="qq-option" onclick="selectGap(this)" data-val="Article 12 logging schema">
+              <span data-i18n="qq_o2">📋 Article 12 logging schema</span>
+            </button>
+            <button class="qq-option" onclick="selectGap(this)" data-val="Risk classification (Annex III screening)">
+              <span data-i18n="qq_o3">⚠️ Risk classification (Annex III screening)</span>
+            </button>
+            <button class="qq-option" onclick="selectGap(this)" data-val="Training data governance (Art. 10)">
+              <span data-i18n="qq_o4">🗃️ Training data governance (Art. 10)</span>
+            </button>
+            <button class="qq-option" onclick="selectGap(this)" data-val="QMS / process integration (Art. 17)">
+              <span data-i18n="qq_o5">⚙️ QMS / process integration (Art. 17)</span>
+            </button>
+            <button class="qq-option" onclick="selectGap(this)" data-val="Don't know where to start">
+              <span data-i18n="qq_o6">🤷 Don't know where to start</span>
+            </button>
+          </div>
+
+          <div class="qq-email-row">
+            <input type="email" id="qqEmail" placeholder="your.name@company.com" autocomplete="email" />
+            <button class="btn-qq-submit" id="qqSubmit" onclick="submitQuickQ()" disabled data-i18n="qq_btn">Send →</button>
+          </div>
+          <div class="qq-confirm" id="qqConfirm">
+            ✅ <span data-i18n="qq_confirm">Got it — I'll be in touch within 24 hours.</span>
+          </div>
+          <p class="qq-note" data-i18n="qq_note">No pitch. Just a useful reply. hello&#64;keithan.eu</p>
+        </div>
+      </div>
+
+
       <div class="unlock-or-divider reveal">
         <span><span data-i18n="or_divider">Or choose a premium pathway below</span></span>
       </div>
@@ -3105,6 +3268,19 @@
         uf1_li1: 'Vollständige Anhang-IV-Checkliste', uf1_li2: 'Art. 12 Logging-Schema-Vorlagen', uf1_li3: 'ODD-Abdeckungsmatrix &amp; RACI-Export', uf1_li4: 'Governance-Stufen 03–05 Details',
         uf2_li1: 'Alles aus der E-Mail-Stufe', uf2_li2: 'CI/CD-Validator-YAML-Konfigurationen', uf2_li3: 'Python-Dokumentationsgenerator', uf2_li4: 'Konformitätsbewertungs-Checkliste', uf2_li5: 'Vorlage für EU-Konformitätserklärung',
         uf3_li1: '30-minütiges 1:1 mit Keithan', uf3_li2: 'Lückenanalyse gegen EU-KI-Gesetz-Pflichten', uf3_li3: '21-Tage-Sprint-Roadmap für Ihr Team', uf3_li4: 'Ingolstadt / remote — Ihre Wahl',
+
+        /* Quick question card */
+        qq_title:   'Kurze Frage bevor Sie gehen',
+        qq_sub:     'Was ist die größte EU-KI-Gesetz-Compliance-Lücke Ihres Teams aktuell? Wählen Sie eine Antwort und hinterlassen Sie Ihre E-Mail — ich melde mich innerhalb von 24 Stunden.',
+        qq_o1: '📁 Technische Unterlagen / Anhang IV',
+        qq_o2: '📋 Artikel 12 Logging-Schema',
+        qq_o3: '⚠️ Risikoklassifizierung (Anhang-III-Screening)',
+        qq_o4: '🗃️ Trainingsdaten-Governance (Art. 10)',
+        qq_o5: '⚙️ QMS / Prozessintegration (Art. 17)',
+        qq_o6: '🤷 Ich weiß nicht, wo ich anfangen soll',
+        qq_btn:     'Absenden →',
+        qq_confirm: 'Danke — ich melde mich innerhalb von 24 Stunden.',
+        qq_note:    'Kein Verkaufsgespräch. Nur eine nützliche Antwort. hello@keithan.eu',
         footer_brand: 'KI-Governance-Playbook · ADAS-Teams',
       }
     };
@@ -3180,6 +3356,67 @@
           el.style.userSelect = '';
         });
       }, 3000);
+    }
+
+    /* ─────────────────────────────────────────────
+       9. QUICK QUESTION — gap selector + Formspree
+    ───────────────────────────────────────────── */
+    var _qqGap = '';
+
+    function selectGap(btn) {
+      document.querySelectorAll('.qq-option').forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      _qqGap = btn.getAttribute('data-val');
+      /* Enable submit once a gap is chosen */
+      var emailEl = document.getElementById('qqEmail');
+      if (emailEl && emailEl.value.trim()) {
+        document.getElementById('qqSubmit').disabled = false;
+      }
+    }
+
+    /* Also enable submit when email is typed (if gap already selected) */
+    document.addEventListener('DOMContentLoaded', function() {
+      var emailEl = document.getElementById('qqEmail');
+      if (emailEl) {
+        emailEl.addEventListener('input', function() {
+          document.getElementById('qqSubmit').disabled = !(this.value.trim() && _qqGap);
+        });
+      }
+    });
+
+    function submitQuickQ() {
+      var email = document.getElementById('qqEmail').value.trim();
+      if (!email || !_qqGap) return;
+
+      var btn = document.getElementById('qqSubmit');
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      fetch('https://formspree.io/f/mgonkvnn', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Playbook gap answer: ' + _qqGap,
+          email: email,
+          compliance_gap: _qqGap,
+          source: 'Quick Question Card — AI Governance Playbook'
+        })
+      })
+      .then(function(r) {
+        if (r.ok) {
+          document.getElementById('qqConfirm').classList.add('visible');
+          document.getElementById('qqOptions').style.opacity = '.4';
+          document.getElementById('qqEmail').style.display = 'none';
+          btn.style.display = 'none';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Try again';
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Try again';
+      });
     }
 
   </script>
