@@ -938,6 +938,28 @@
       content: ''; flex: 1; height: 1px; background: var(--border);
     }
 
+
+    /* ══════════════════════════════════════════════
+       LANGUAGE TOGGLE  [i18n v1]
+    ══════════════════════════════════════════════ */
+    .lang-toggle {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3px; cursor: pointer;
+      margin-left: 12px; flex-shrink: 0;
+    }
+    .lang-btn {
+      font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+      padding: 4px 10px; border-radius: 16px; border: none;
+      cursor: pointer; transition: all .15s; background: transparent;
+      color: var(--ink-soft); font-family: var(--font-body);
+    }
+    .lang-btn.active {
+      background: var(--blue); color: #fff;
+      box-shadow: 0 1px 6px rgba(26,110,245,.3);
+    }
+    .lang-btn:hover:not(.active) { color: var(--blue); }
+
   </style>
 </head>
 <body>
@@ -947,7 +969,7 @@
   ════════════════════════════════════════════ -->
   <div class="deadline-banner">
     <span class="pulse"></span>
-    <span><strong>Enforcement Deadline:</strong> EU AI Act for high-risk AI systems — <strong>2 August 2026</strong>. Your ADAS team needs a compliance sprint now.</span>
+    <span><strong data-i18n="banner_label">Enforcement Deadline:</strong> <span data-i18n="banner_text">EU AI Act for high-risk AI systems — </span><strong>2 August 2026</strong><span data-i18n="banner_cta">. Your ADAS team needs a compliance sprint now.</span></span>
   </div>
 
   <!-- ════════════════════════════════════════════
@@ -960,13 +982,17 @@
         AI Governance Playbook
       </div>
       <div class="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#risk">Risk Classification</a>
-        <a href="#docs">Documentation</a>
-        <a href="#governance">Governance</a>
-        <a href="#tools">Tools</a>
-        <a href="#raci">Roles &amp; RACI</a>
-        <a href="#unlock" class="nav-premium-pill">&#x1F512; Unlock Premium</a>
+        <a href="#overview"><span data-i18n="nav_overview">Overview</span></a>
+        <a href="#risk"><span data-i18n="nav_risk">Risk Classification</span></a>
+        <a href="#docs"><span data-i18n="nav_docs">Documentation</span></a>
+        <a href="#governance"><span data-i18n="nav_gov">Governance</span></a>
+        <a href="#tools"><span data-i18n="nav_tools">Tools</span></a>
+        <a href="#raci"><span data-i18n="nav_raci">Roles &amp; RACI</span></a>
+        <a href="#unlock" class="nav-premium-pill">&#x1F512; <span data-i18n="nav_premium">Unlock Premium</span></a>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -979,39 +1005,37 @@
       <div class="hero-eyebrow">
         <span class="hero-tag">EU AI Act · Regulation (EU) 2024/1689</span>
         <span class="hero-free-tag">&#x2713; Free Edition</span>
-        <span class="hero-date">Updated March 2026</span>
+        <span class="hero-date"><span data-i18n="hero_date">Updated March 2026</span></span>
       </div>
 
-      <h1>AI Governance Playbook<br/>for <em>ADAS Teams</em></h1>
+      <h1><span data-i18n="hero_title">AI Governance Playbook</span><br/>for <em><span data-i18n="hero_title2">ADAS Teams</span></em></h1>
 
       <p class="hero-sub">
-        An engineer-ready compliance framework mapping EU AI Act obligations
-        onto ADAS development workflows — from concept gate to homologation.
-        Free to use. Premium templates available.
+        <span data-i18n="hero_sub">An engineer-ready compliance framework mapping EU AI Act obligations onto ADAS development workflows — from concept gate to homologation. Free to use. Premium templates available.</span>
       </p>
 
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#overview">Start Reading ↓</a>
-        <a class="btn btn-ghost" href="#governance">Jump to Workflow &#x2192;</a>
+        <a class="btn btn-primary" href="#overview"><span data-i18n="hero_cta1">Start Reading ↓</span></a>
+        <a class="btn btn-ghost" href="#governance"><span data-i18n="hero_cta2">Jump to Workflow →</span></a>
         <a class="btn-gold" href="#unlock" style="border-radius:8px;padding:12px 22px;font-size:.9rem;">&#x1F512; Unlock Premium</a>
       </div>
 
       <div class="hero-stats">
         <div class="stat-item">
           <div class="stat-num">Aug 2026</div>
-          <div class="stat-label">High-risk system enforcement</div>
+          <div class="stat-label"><span data-i18n="stat1">High-risk system enforcement</span></div>
         </div>
         <div class="stat-item">
           <div class="stat-num">Art. 9–15</div>
-          <div class="stat-label">Core ADAS obligations</div>
+          <div class="stat-label"><span data-i18n="stat2">Core ADAS obligations</span></div>
         </div>
         <div class="stat-item">
           <div class="stat-num">€35M</div>
-          <div class="stat-label">Max penalty / 7% global turnover</div>
+          <div class="stat-label"><span data-i18n="stat3">Max penalty / 7% global turnover</span></div>
         </div>
         <div class="stat-item">
           <div class="stat-num">21-Day</div>
-          <div class="stat-label">Recommended sprint cadence</div>
+          <div class="stat-label"><span data-i18n="stat4">Recommended sprint cadence</span></div>
         </div>
       </div>
     </div>
@@ -1024,12 +1048,10 @@
     <div class="container">
 
       <div class="section-head reveal">
-        <div class="label">Section 01</div>
-        <h2>EU AI Act Overview <span class="tier-badge tier-free">&#x2713; Free</span></h2>
+        <div class="label"><span data-i18n="s01_label">Section 01</span></div>
+        <h2><span data-i18n="s01_title">EU AI Act Overview</span> <span class="tier-badge tier-free">&#x2713; Free</span></h2>
         <p>
-          The EU AI Act (Regulation 2024/1689) is the world's first comprehensive
-          AI regulatory framework. For automotive ADAS developers, it introduces mandatory
-          conformity obligations for systems classified as <strong>high-risk AI</strong>.
+          <span data-i18n="s01_sub">The EU AI Act (Regulation 2024/1689) is the world's first comprehensive AI regulatory framework. For automotive ADAS developers, it introduces mandatory conformity obligations for systems classified as </span><strong data-i18n="s01_sub2">high-risk AI</strong>.
         </p>
       </div>
 
@@ -1037,10 +1059,9 @@
       <div class="alert alert-warn reveal" style="margin-bottom:32px;">
         <span class="alert-icon">⚠️</span>
         <div>
-          <strong>ADAS teams are directly in scope.</strong> Any AI system used for
+          <strong data-i18n="s01_alert_title">ADAS teams are directly in scope.</strong> Any AI system used for
           <span data-tooltip="Advanced Driver Assistance Systems — camera, radar, lidar-based perception and control AI">ADAS</span>
-          functions that could affect safety is classified as high-risk under Annex III (§ 3 – Transport).
-          This mandates Technical Files, QMS integration, and post-market monitoring.
+          <span data-i18n="s01_alert_body">functions that could affect safety is classified as high-risk under Annex III (§ 3 – Transport). This mandates Technical Files, QMS integration, and post-market monitoring.</span>
         </div>
       </div>
 
@@ -1048,23 +1069,23 @@
       <div class="pillar-grid reveal">
         <div class="pillar-card blue">
           <div class="pillar-icon blue">🏗️</div>
-          <h3>High-Risk Classification</h3>
-          <p>ADAS AI is listed in Annex III. Providers must register systems in the EU database and complete conformity assessments before market deployment.</p>
+          <h3><span data-i18n="pillar1_title">High-Risk Classification</span></h3>
+          <p><span data-i18n="pillar1_body">ADAS AI is listed in Annex III. Providers must register systems in the EU database and complete conformity assessments before market deployment.</span></p>
         </div>
         <div class="pillar-card red">
           <div class="pillar-icon red">📋</div>
-          <h3>Technical Documentation</h3>
-          <p>Annex IV mandates comprehensive Technical Files covering system design, training data, validation methodology, and performance metrics — version-controlled.</p>
+          <h3><span data-i18n="pillar2_title">Technical Documentation</span></h3>
+          <p><span data-i18n="pillar2_body">Annex IV mandates comprehensive Technical Files covering system design, training data, validation methodology, and performance metrics — version-controlled.</span></p>
         </div>
         <div class="pillar-card green">
           <div class="pillar-icon green">📊</div>
-          <h3>Post-Market Monitoring</h3>
-          <p>Article 72 requires continuous monitoring plans. Providers must collect and analyze real-world performance data and report serious incidents to authorities.</p>
+          <h3><span data-i18n="pillar3_title">Post-Market Monitoring</span></h3>
+          <p><span data-i18n="pillar3_body">Article 72 requires continuous monitoring plans. Providers must collect and analyze real-world performance data and report serious incidents to authorities.</span></p>
         </div>
         <div class="pillar-card amber">
           <div class="pillar-icon amber">🔍</div>
-          <h3>Human Oversight</h3>
-          <p>Article 14 requires high-risk AI to enable human oversight. ADAS systems must include override capabilities and interpretable outputs for driver intervention.</p>
+          <h3><span data-i18n="pillar4_title">Human Oversight</span></h3>
+          <p><span data-i18n="pillar4_body">Article 14 requires high-risk AI to enable human oversight. ADAS systems must include override capabilities and interpretable outputs for driver intervention.</span></p>
         </div>
       </div>
 
@@ -1073,67 +1094,67 @@
       <!-- Article timeline -->
       <div class="grid-2 reveal" style="gap:40px; align-items:start;">
         <div>
-          <h3 style="margin-bottom:20px; font-size:1.1rem;">Key Articles for ADAS Teams</h3>
+          <h3 style="margin-bottom:20px; font-size:1.1rem;"><span data-i18n="art_title">Key Articles for ADAS Teams</span></h3>
           <div class="timeline">
             <div class="tl-item">
               <div class="tl-tag">Article 9</div>
-              <p>Risk management system — documented, iterative process covering the entire AI lifecycle.</p>
+              <p><span data-i18n="art9">Risk management system — documented, iterative process covering the entire AI lifecycle.</span></p>
             </div>
             <div class="tl-item">
               <div class="tl-tag">Article 10</div>
-              <p>Training, validation, and testing data governance. Data quality, bias identification, labeling traceability.</p>
+              <p><span data-i18n="art10">Training, validation, and testing data governance. Data quality, bias identification, labeling traceability.</span></p>
             </div>
             <div class="tl-item">
               <div class="tl-tag">Article 11 + Annex IV</div>
-              <p>Technical documentation — must be updated continuously and available to notified bodies upon request.</p>
+              <p><span data-i18n="art11">Technical documentation — must be updated continuously and available to notified bodies upon request.</span></p>
             </div>
             <div class="tl-item">
               <div class="tl-tag">Article 12</div>
-              <p>Logging requirements: automatic event logs, tamper-proof, sufficient to trace system behavior in deployment.</p>
+              <p><span data-i18n="art12">Logging requirements: automatic event logs, tamper-proof, sufficient to trace system behavior in deployment.</span></p>
             </div>
             <div class="tl-item">
               <div class="tl-tag">Article 13</div>
-              <p>Transparency and provision of information. Instructions for use must be clear for downstream deployers.</p>
+              <p><span data-i18n="art13">Transparency and provision of information. Instructions for use must be clear for downstream deployers.</span></p>
             </div>
             <div class="tl-item">
               <div class="tl-tag">Article 15</div>
-              <p>Accuracy, robustness, cybersecurity. Systems must be resilient to adversarial inputs and edge cases.</p>
+              <p><span data-i18n="art15">Accuracy, robustness, cybersecurity. Systems must be resilient to adversarial inputs and edge cases.</span></p>
             </div>
             <div class="tl-item">
               <div class="tl-tag">Article 17</div>
-              <p>Quality management system (QMS) integration. Must cover design, development, testing, and post-market phases.</p>
+              <p><span data-i18n="art17">Quality management system (QMS) integration. Must cover design, development, testing, and post-market phases.</span></p>
             </div>
           </div>
         </div>
         <div>
-          <h3 style="margin-bottom:20px; font-size:1.1rem;">Typical Compliance Readiness (Industry Baseline)</h3>
+          <h3 style="margin-bottom:20px; font-size:1.1rem;"><span data-i18n="readiness_title">Typical Compliance Readiness (Industry Baseline)</span></h3>
           <div class="readiness-grid" style="grid-template-columns:1fr; margin-top:0;">
             <div class="readiness-item">
-              <div class="readiness-header"><span>Risk Management Documentation</span><span style="color:var(--amber)">42%</span></div>
+              <div class="readiness-header"><span><span data-i18n="r1">Risk Management Documentation</span></span><span style="color:var(--amber)">42%</span></div>
               <div class="progress-bar"><div class="progress-fill pf-amber" style="width:42%"></div></div>
             </div>
             <div class="readiness-item">
-              <div class="readiness-header"><span>Training Data Traceability</span><span style="color:var(--red)">28%</span></div>
+              <div class="readiness-header"><span><span data-i18n="r2">Training Data Traceability</span></span><span style="color:var(--red)">28%</span></div>
               <div class="progress-bar"><div class="progress-fill pf-red" style="width:28%"></div></div>
             </div>
             <div class="readiness-item">
-              <div class="readiness-header"><span>Automated Logging (Art. 12)</span><span style="color:var(--amber)">51%</span></div>
+              <div class="readiness-header"><span><span data-i18n="r3">Automated Logging (Art. 12)</span></span><span style="color:var(--amber)">51%</span></div>
               <div class="progress-bar"><div class="progress-fill pf-amber" style="width:51%"></div></div>
             </div>
             <div class="readiness-item">
-              <div class="readiness-header"><span>QMS Integration (Art. 17)</span><span style="color:var(--red)">35%</span></div>
+              <div class="readiness-header"><span><span data-i18n="r4">QMS Integration (Art. 17)</span></span><span style="color:var(--red)">35%</span></div>
               <div class="progress-bar"><div class="progress-fill pf-red" style="width:35%"></div></div>
             </div>
             <div class="readiness-item">
-              <div class="readiness-header"><span>Human Oversight Mechanisms</span><span style="color:var(--green)">68%</span></div>
+              <div class="readiness-header"><span><span data-i18n="r5">Human Oversight Mechanisms</span></span><span style="color:var(--green)">68%</span></div>
               <div class="progress-bar"><div class="progress-fill pf-green" style="width:68%"></div></div>
             </div>
             <div class="readiness-item">
-              <div class="readiness-header"><span>Technical File Completeness</span><span style="color:var(--red)">22%</span></div>
+              <div class="readiness-header"><span><span data-i18n="r6">Technical File Completeness</span></span><span style="color:var(--red)">22%</span></div>
               <div class="progress-bar"><div class="progress-fill pf-red" style="width:22%"></div></div>
             </div>
           </div>
-          <p style="font-size:.78rem; color:var(--ink-muted); margin-top:12px;">Source: Estimated from published regulatory readiness surveys, 2024–2025. Values are indicative.</p>
+          <p style="font-size:.78rem; color:var(--ink-muted); margin-top:12px;"><span data-i18n="readiness_source">Source: Estimated from published regulatory readiness surveys, 2024–2025. Values are indicative.</span></p>
         </div>
       </div>
 
@@ -1147,19 +1168,17 @@
     <div class="container">
 
       <div class="section-head reveal">
-        <div class="label">Section 02</div>
-        <h2>Risk Classification <span class="tier-badge tier-free">&#x2713; Free</span></h2>
+        <div class="label"><span data-i18n="s02_label">Section 02</span></div>
+        <h2><span data-i18n="s02_title">Risk Classification</span> <span class="tier-badge tier-free">&#x2713; Free</span></h2>
         <p>
-          Map your ADAS AI components to EU AI Act risk levels. High-risk systems
-          require full Article 9–17 compliance. Lower-risk components still need minimal documentation.
+          <span data-i18n="s02_sub">Map your ADAS AI components to EU AI Act risk levels. High-risk systems require full Article 9–17 compliance. Lower-risk components still need minimal documentation.</span>
         </p>
       </div>
 
       <div class="alert alert-info reveal" style="margin-bottom:28px;">
         <span class="alert-icon">ℹ️</span>
         <div>
-          Under the Act, <strong>all</strong> AI components that feed into safety-critical vehicle decisions
-          are presumed high-risk unless explicitly scoped out. When in doubt, treat it as high-risk.
+          <span data-i18n="s02_alert">Under the Act, </span><strong data-i18n="s02_alert_all">all</strong><span data-i18n="s02_alert2"> AI components that feed into safety-critical vehicle decisions are presumed high-risk unless explicitly scoped out. When in doubt, treat it as high-risk.</span>
         </div>
       </div>
 
@@ -1168,11 +1187,11 @@
         <table class="risk-table">
           <thead>
             <tr>
-              <th>ADAS Component</th>
-              <th>AI Type</th>
-              <th>Risk Level</th>
-              <th>Key Obligations</th>
-              <th>Article Refs</th>
+              <th><span data-i18n="th_component">ADAS Component</span></th>
+              <th><span data-i18n="th_aitype">AI Type</span></th>
+              <th><span data-i18n="th_risk">Risk Level</span></th>
+              <th><span data-i18n="th_obligations">Key Obligations</span></th>
+              <th><span data-i18n="th_articles">Article Refs</span></th>
             </tr>
           </thead>
           <tbody>
@@ -1252,11 +1271,10 @@
     <div class="container">
 
       <div class="section-head reveal">
-        <div class="label">Section 03</div>
-        <h2>Documentation Requirements <span class="tier-badge tier-free">&#x2713; Free</span></h2>
+        <div class="label"><span data-i18n="s03_label">Section 03</span></div>
+        <h2><span data-i18n="s03_title">Documentation Requirements</span> <span class="tier-badge tier-free">&#x2713; Free</span></h2>
         <p>
-          Article 11 + Annex IV define what must be documented. For ADAS teams,
-          this means machine-readable, version-controlled artifacts — not static PDFs.
+          <span data-i18n="s03_sub">Article 11 + Annex IV define what must be documented. For ADAS teams, this means machine-readable, version-controlled artifacts — not static PDFs.</span>
         </p>
       </div>
 
@@ -1345,15 +1363,15 @@
 
       <!-- SPLIT COMPARISON -->
       <div class="section-head reveal" style="margin-bottom:24px;">
-        <h3 style="font-size:1.3rem;">What Teams Have vs. What Homologation Asks For</h3>
-        <p style="margin-top:8px;">This is the gap most ADAS teams discover late. The left column reflects typical engineering artifacts; the right column shows what a notified body or authority will look for.</p>
+        <h3 style="font-size:1.3rem;"><span data-i18n="cmp_title">What Teams Have vs. <span data-i18n="cmp_need">What Homologation Asks For</span></span></h3>
+        <p style="margin-top:8px;"><span data-i18n="cmp_sub">This is the gap most ADAS teams discover late. The left column reflects typical engineering artifacts; the right column shows what a notified body or authority will look for.</span></p>
       </div>
 
       <div class="compare-wrap reveal">
         <div class="compare-col have">
           <h3>
             <span style="font-size:1.3rem;">📁</span>
-            What Teams Typically Have
+            <span data-i18n="cmp_have">What Teams Typically Have</span>
           </h3>
 
           <div class="compare-item">
@@ -1400,12 +1418,12 @@
           </div>
         </div>
 
-        <div class="compare-divider">GAP ANALYSIS</div>
+        <div class="compare-divider"><span data-i18n="cmp_divider">GAP ANALYSIS</span></div>
 
         <div class="compare-col need">
           <h3>
             <span style="font-size:1.3rem;">📋</span>
-            What Homologation Asks For
+            <span data-i18n="cmp_need">What Homologation Asks For</span>
           </h3>
 
           <div class="compare-item">
@@ -1479,7 +1497,7 @@
             <span class="lock-icon">&#x1F512;</span>
             <h4>Advanced Compliance Templates</h4>
             <p>Full JSON schemas for Annex IV Technical Files, Article 12 logging, dataset cards, and CI/CD validator configs &mdash; ready to drop into your repo.</p>
-            <a href="#unlock" class="btn-gold">Get Premium Access &#x2192;</a>
+            <a href="#unlock" class="btn-gold"><span data-i18n="card1_btn">Get Premium Access →</span></a>
           </div>
         </div>
       </div>
@@ -1518,7 +1536,7 @@
             <span class="lock-icon">&#x1F512;</span>
             <h4>Art. 12 Logging Schema &mdash; Full Implementation</h4>
             <p>Production-ready event log schema with OpenTelemetry integration, Kafka config, tamper-proof hashing, and a Python export script for authority audits.</p>
-            <a href="#unlock" class="btn-gold">Get Premium Access &#x2192;</a>
+            <a href="#unlock" class="btn-gold"><span data-i18n="card1_btn">Get Premium Access →</span></a>
           </div>
         </div>
       </div>
@@ -1534,10 +1552,10 @@
     <div class="container">
 
       <div class="section-head reveal">
-        <div class="label">Section 04</div>
-        <h2>Governance Checkpoints</h2>
+        <div class="label"><span data-i18n="s04_label">Section 04</span></div>
+        <h2><span data-i18n="s04_title">Governance Checkpoints</span></h2>
         <p>
-          Embed compliance into your ADAS development stages.
+          <span data-i18n="s04_sub">Embed compliance into your ADAS development stages.</span>
           <span class="tier-badge tier-free">Stages 01-02 Free</span>
           <span class="tier-badge tier-premium">&#x1F512; Stages 03-05 Premium</span>
         </p>
@@ -1547,13 +1565,13 @@
       <div class="flow-stages reveal" id="stageSelector">
         <div class="flow-stage active" data-stage="0">
           <div class="stage-num">01</div>
-          <div class="stage-name">Concept</div>
-          <div class="stage-sub">ODD &amp; Intent</div>
+          <div class="stage-name"><span data-i18n="stage01_name">Concept</span></div>
+          <div class="stage-sub"><span data-i18n="stage01_sub">ODD &amp; Intent</span></div>
         </div>
         <div class="flow-stage" data-stage="1">
           <div class="stage-num">02</div>
-          <div class="stage-name">Design</div>
-          <div class="stage-sub">Architecture &amp; Data</div>
+          <div class="stage-name"><span data-i18n="stage02_name">Design</span></div>
+          <div class="stage-sub"><span data-i18n="stage02_sub">Architecture &amp; Data</span></div>
         </div>
         <div class="flow-stage stage-locked" data-stage="2" data-premium-tooltip="Premium: Implementation — training run traceability, CI/CD validators, Art. 12 activation">
           <span class="stage-lock-icon">&#x1F512;</span>
@@ -1687,7 +1705,7 @@
               <span class="lock-icon">&#x1F512;</span>
               <h4>Stage 03, 04 &amp; 05 &mdash; Full Detail</h4>
               <p>Implementation, Validation, and Release checkpoints including CI/CD validator configs, ODD coverage evidence templates, conformity assessment checklist, and PMM activation guide.</p>
-              <a href="#unlock" class="btn-gold">Get Premium Access &#x2192;</a>
+              <a href="#unlock" class="btn-gold"><span data-i18n="card1_btn">Get Premium Access →</span></a>
             </div>
           </div>
         </div>
@@ -1736,8 +1754,8 @@
     <div class="container">
 
       <div class="section-head reveal">
-        <div class="label">Section 05</div>
-        <h2>Compliance Tools &amp; Integrations <span class="tier-badge tier-free">&#x2713; Free</span></h2>
+        <div class="label"><span data-i18n="s05_label">Section 05</span></div>
+        <h2><span data-i18n="s05_title">Compliance Tools &amp; Integrations</span> <span class="tier-badge tier-free">&#x2713; Free</span></h2>
         <p>
           Compliance infrastructure runs in your existing toolchain.
           These categories cover logging, traceability, ALM integration, and validation.
@@ -1926,12 +1944,10 @@
     <div class="container">
 
       <div class="section-head reveal">
-        <div class="label">Section 06</div>
-        <h2>Training &amp; Roles (RACI) <span class="tier-badge tier-free">&#x2713; Free</span></h2>
+        <div class="label"><span data-i18n="s06_label">Section 06</span></div>
+        <h2><span data-i18n="s06_title">Training &amp; Roles (RACI)</span> <span class="tier-badge tier-free">&#x2713; Free</span></h2>
         <p>
-          EU AI Act compliance is a team sport. The matrix below assigns
-          Responsible, Accountable, Consulted, and Informed roles across
-          key compliance activities.
+          <span data-i18n="s06_sub">EU AI Act compliance is a team sport. The matrix below assigns Responsible, Accountable, Consulted, and Informed roles across key compliance activities.</span>
         </p>
       </div>
 
@@ -1939,14 +1955,14 @@
         <table class="raci-table">
           <thead>
             <tr>
-              <th style="min-width:200px;">Compliance Activity</th>
-              <th>ML Engineer</th>
-              <th>Data Engineer</th>
-              <th>Systems Engineer</th>
-              <th>QA / Test Engineer</th>
-              <th>Functional Safety Lead</th>
-              <th>Product Owner</th>
-              <th>Legal / Compliance</th>
+              <th style="min-width:200px;"><span data-i18n="raci_activity">Compliance Activity</span></th>
+              <th><span data-i18n="raci_ml">ML Engineer</span></th>
+              <th><span data-i18n="raci_data">Data Engineer</span></th>
+              <th><span data-i18n="raci_sys">Systems Engineer</span></th>
+              <th><span data-i18n="raci_qa">QA / Test Engineer</span></th>
+              <th><span data-i18n="raci_safety">Functional Safety Lead</span></th>
+              <th><span data-i18n="raci_po">Product Owner</span></th>
+              <th><span data-i18n="raci_legal">Legal / Compliance</span></th>
             </tr>
           </thead>
           <tbody>
@@ -2021,7 +2037,7 @@
               <td><span class="raci-cell r-x">–</span></td>
             </tr>
             <tr>
-              <td><strong>QMS Integration (Art. 17)</strong></td>
+              <td><strong><span data-i18n="r4">QMS Integration (Art. 17)</span></strong></td>
               <td><span class="raci-cell r-I">I</span></td>
               <td><span class="raci-cell r-I">I</span></td>
               <td><span class="raci-cell r-C">C</span></td>
@@ -2056,16 +2072,16 @@
 
       <!-- RACI legend -->
       <div class="raci-legend reveal">
-        <span><span class="raci-cell r-R" style="width:24px;height:24px;font-size:.75rem;">R</span> Responsible — does the work</span>
-        <span><span class="raci-cell r-A" style="width:24px;height:24px;font-size:.75rem;">A</span> Accountable — owns the outcome</span>
-        <span><span class="raci-cell r-C" style="width:24px;height:24px;font-size:.75rem;">C</span> Consulted — provides input</span>
-        <span><span class="raci-cell r-I" style="width:24px;height:24px;font-size:.75rem;">I</span> Informed — kept updated</span>
+        <span><span class="raci-cell r-R" style="width:24px;height:24px;font-size:.75rem;">R</span> <span data-i18n="raci_r">Responsible — does the work</span></span>
+        <span><span class="raci-cell r-A" style="width:24px;height:24px;font-size:.75rem;">A</span> <span data-i18n="raci_a">Accountable — owns the outcome</span></span>
+        <span><span class="raci-cell r-C" style="width:24px;height:24px;font-size:.75rem;">C</span> <span data-i18n="raci_c">Consulted — provides input</span></span>
+        <span><span class="raci-cell r-I" style="width:24px;height:24px;font-size:.75rem;">I</span> <span data-i18n="raci_i">Informed — kept updated</span></span>
       </div>
 
       <hr class="divider" />
 
       <!-- Training needs -->
-      <h3 class="reveal" style="font-size:1.2rem; margin-bottom:20px;">Recommended Training by Role</h3>
+      <h3 class="reveal" style="font-size:1.2rem; margin-bottom:20px;"><span data-i18n="training_title">Recommended Training by Role</span></h3>
       <div class="grid-3 reveal">
         <div class="card">
           <div style="font-size:1.4rem; margin-bottom:12px;">👨‍💻</div>
@@ -2114,12 +2130,10 @@
 
       <!-- Section header -->
       <div class="unlock-head reveal">
-        <div class="label">Ready to Comply?</div>
-        <h2>Unlock <em>Premium</em> Playbook Access</h2>
+        <div class="label"><span data-i18n="unlock_label">Ready to Comply?</span></div>
+        <h2><span data-i18n="unlock_title">Unlock </span><em><span data-i18n="unlock_title_em">Premium</span></em><span data-i18n="unlock_title2"> Playbook Access</span></h2>
         <p>
-          Choose how you want to get started &mdash; instant access to full EU AI Act
-          checklists, templates, and governance frameworks, or book a session to
-          implement them with expert guidance.
+          <span data-i18n="unlock_sub">Choose how you want to get started — instant access to full EU AI Act checklists, templates, and governance frameworks, or book a session to implement them with expert guidance.</span>
         </p>
       </div>
 
@@ -2127,11 +2141,11 @@
       <div class="free-download-banner reveal">
         <div class="fdb-left">
           <span class="tier-badge tier-free" style="margin-left:0; margin-bottom:8px; display:inline-flex;">&#x2713; Free Edition</span>
-          <h4>Download the Free Playbook</h4>
-          <p>This complete interactive HTML file &mdash; all 6 sections, risk table, RACI matrix, split comparison. Works offline. No sign-up required.</p>
+          <h4><span data-i18n="dl_title">Download the Free Playbook</span></h4>
+          <p><span data-i18n="dl_body">This complete interactive HTML file — all 6 sections, risk table, RACI matrix, split comparison. Works offline. No sign-up required.</span></p>
         </div>
         <div class="fdb-right">
-          <button class="btn-download" onclick="downloadPlaybook()" style="white-space:nowrap;">&#x2193; Download Free Version</button>
+          <button class="btn-download" onclick="downloadPlaybook()" style="white-space:nowrap;"><span data-i18n="dl_btn">↓ Download Free Version</span></button>
           <p style="font-size:.74rem; color:var(--ink-muted); margin-top:8px; text-align:center;">
             Share: <a href="https://lxdadvisory.de" target="_blank" rel="noopener" style="color:var(--blue); font-family:var(--font-mono); font-size:.74rem;">keithan-c.github.io/Playbook</a>
           </p>
@@ -2173,12 +2187,12 @@
               Get Premium Access &#x2192;
             </button>
             <p style="font-size:.74rem; color:var(--ink-muted); text-align:center; margin-top:4px;">
-              No spam. Unsubscribe anytime.
+              <span data-i18n="card1_note">No spam. Unsubscribe anytime.</span>
             </p>
           </div>
           <div class="inline-confirm" id="unlockEmailConfirm">
             <span style="font-size:1.3rem;">&#x2705;</span>
-            <span>Check your inbox &mdash; access link on its way!</span>
+            <span><span data-i18n="card1_confirm">Check your inbox — access link on its way!</span></span>
           </div>
         </div>
 
@@ -2186,7 +2200,7 @@
         <div class="unlock-card card-buy">
           <span class="popular-badge">&#x2B50; Most Popular</span>
           <div class="unlock-icon">&#x1F4E5;</div>
-          <h3>Upgrade to Premium</h3>
+          <h3><span data-i18n="card2_title">Upgrade to Premium</span></h3>
           <p>
             Access detailed ADAS risk classification templates, AI compliance logs,
             and step-by-step governance workflows &mdash; yours to keep and use
@@ -2208,18 +2222,16 @@
             &#x1F4B3; Buy Premium Playbook &#x2192;
           </a>
           <p style="font-size:.74rem; color:var(--ink-muted); text-align:center; margin-top:10px;">
-            Secure checkout &middot; Instant download after payment
+            <span data-i18n="card2_note">Secure checkout · Instant download after payment</span>
           </p>
         </div>
 
         <!-- ── CARD 3: Consultation Booking ── -->
         <div class="unlock-card card-consult">
           <div class="unlock-icon">&#x1F4C5;</div>
-          <h3>Book a Strategy Session</h3>
+          <h3><span data-i18n="card3_title">Book a Strategy Session</span></h3>
           <p>
-            Book a free 30-minute gap analysis session to map your ADAS team's
-            EU AI Act obligations &mdash; tailored to your stack, timeline, and
-            the August 2026 enforcement deadline.
+            <span data-i18n="card3_body">Book a free 30-minute gap analysis session to map your ADAS team's EU AI Act obligations — tailored to your stack, timeline, and the August 2026 enforcement deadline.</span>
           </p>
           <ul class="unlock-features">
             <li>30-minute 1:1 with Keithan</li>
@@ -2236,7 +2248,7 @@
             &#x1F4C5; Book a Session &#x2192;
           </a>
           <p style="font-size:.74rem; color:var(--ink-muted); text-align:center; margin-top:10px;">
-Free &middot; No commitment required
+<span data-i18n="card3_note">Free · No commitment required</span>
           </p>
         </div>
 
@@ -2244,9 +2256,9 @@ Free &middot; No commitment required
 
       <!-- Upgrade note -->
       <p class="unlock-footer-note reveal">
-        Already have the free version?
+        <span data-i18n="upgrade_note">Already have the free version?</span>
         <a href="https://buy.stripe.com/3cIdRbdwsfNmfsD1dX87K00" target="_blank" rel="noopener">
-          Upgrade anytime for full access &#x2192;
+          <span data-i18n="upgrade_link">Upgrade anytime for full access →</span>
         </a>
         &nbsp;&middot;&nbsp;
         Questions? <a href="mailto&#58;hello&#64;keithan&#46;eu">hello&#64;keithan.eu</a> &nbsp;&middot;&nbsp; <a href="https://lxdadvisory.de" target="_blank" rel="noopener">keithan-c.github.io/Playbook</a>
@@ -2273,9 +2285,8 @@ Free &middot; No commitment required
         </div>
       </div>
       <div class="footer-note">
-        This playbook is a practitioner reference for ADAS development teams. It does not constitute legal advice.
-        Always validate compliance obligations with qualified legal counsel and your notified body.
-        Regulation (EU) 2024/1689 — enforcement of high-risk AI system obligations: <strong style="color:#9ab">2 August 2026</strong>.
+        <span data-i18n="footer_note">This playbook is a practitioner reference for ADAS development teams. It does not constitute legal advice. Always validate compliance obligations with qualified legal counsel and your notified body.</span>
+        Regulation (EU) 2024/1689 — <span data-i18n="footer_enforcement">enforcement of high-risk AI system obligations:</span> <strong style="color:#9ab">2 August 2026</strong>.
       </div>
       <hr />
       <div class="footer-bottom">
@@ -2444,6 +2455,328 @@ Free &middot; No commitment required
       if (ui) ui.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') handleUnlockEmail();
       });
+    });
+
+    /* ═══════════════════════════════════════════════════════════════
+       LANGUAGE TOGGLE ENGINE  — EN / DE
+       Usage: setLang('de') or setLang('en')
+       Every translatable string is tagged with data-i18n="key"
+       on the element. This engine swaps innerHTML for each key.
+    ═══════════════════════════════════════════════════════════════ */
+    var TRANSLATIONS = {
+      en: {
+        /* Banner */
+        banner_label: 'Enforcement Deadline:',
+        banner_text:  'EU AI Act for high-risk AI systems — ',
+        banner_cta:   '. Your ADAS team needs a compliance sprint now.',
+        /* Nav */
+        nav_overview: 'Overview',
+        nav_risk:     'Risk Classification',
+        nav_docs:     'Documentation',
+        nav_gov:      'Governance',
+        nav_tools:    'Tools',
+        nav_raci:     'Roles &amp; RACI',
+        nav_premium:  'Unlock Premium',
+        /* Hero */
+        hero_title:  'AI Governance Playbook',
+        hero_title2: 'ADAS Teams',
+        hero_date:   'Updated March 2026',
+        hero_sub:    'An engineer-ready compliance framework mapping EU AI Act obligations onto ADAS development workflows — from concept gate to homologation. Free to use. Premium templates available.',
+        hero_cta1:   'Start Reading ↓',
+        hero_cta2:   'Jump to Workflow →',
+        stat1: 'High-risk system enforcement',
+        stat2: 'Core ADAS obligations',
+        stat3: 'Max penalty / 7% global turnover',
+        stat4: 'Recommended sprint cadence',
+        /* Section 01 */
+        s01_label: 'Section 01',
+        s01_title: 'EU AI Act Overview',
+        s01_sub:   'The EU AI Act (Regulation 2024/1689) is the world\'s first comprehensive AI regulatory framework. For automotive ADAS developers, it introduces mandatory conformity obligations for systems classified as ',
+        s01_sub2:  'high-risk AI',
+        s01_alert_title: 'ADAS teams are directly in scope.',
+        s01_alert_body:  'functions that could affect safety is classified as high-risk under Annex III (§ 3 – Transport). This mandates Technical Files, QMS integration, and post-market monitoring.',
+        pillar1_title: 'High-Risk Classification',
+        pillar1_body:  'ADAS AI is listed in Annex III. Providers must register systems in the EU database and complete conformity assessments before market deployment.',
+        pillar2_title: 'Technical Documentation',
+        pillar2_body:  'Annex IV mandates comprehensive Technical Files covering system design, training data, validation methodology, and performance metrics — version-controlled.',
+        pillar3_title: 'Post-Market Monitoring',
+        pillar3_body:  'Article 72 requires continuous monitoring plans. Providers must collect and analyze real-world performance data and report serious incidents to authorities.',
+        pillar4_title: 'Human Oversight',
+        pillar4_body:  'Article 14 requires high-risk AI to enable human oversight. ADAS systems must include override capabilities and interpretable outputs for driver intervention.',
+        art_title: 'Key Articles for ADAS Teams',
+        art9:  'Risk management system — documented, iterative process covering the entire AI lifecycle.',
+        art10: 'Training, validation, and testing data governance. Data quality, bias identification, labeling traceability.',
+        art11: 'Technical documentation — must be updated continuously and available to notified bodies upon request.',
+        art12: 'Logging requirements: automatic event logs, tamper-proof, sufficient to trace system behavior in deployment.',
+        art13: 'Transparency and provision of information. Instructions for use must be clear for downstream deployers.',
+        art15: 'Accuracy, robustness, cybersecurity. Systems must be resilient to adversarial inputs and edge cases.',
+        art17: 'Quality management system (QMS) integration. Must cover design, development, testing, and post-market phases.',
+        readiness_title:  'Typical Compliance Readiness (Industry Baseline)',
+        r1: 'Risk Management Documentation',
+        r2: 'Training Data Traceability',
+        r3: 'Automated Logging (Art. 12)',
+        r4: 'QMS Integration (Art. 17)',
+        r5: 'Human Oversight Mechanisms',
+        r6: 'Technical File Completeness',
+        readiness_source: 'Source: Estimated from published regulatory readiness surveys, 2024–2025. Values are indicative.',
+        /* Section 02 */
+        s02_label: 'Section 02',
+        s02_title: 'Risk Classification',
+        s02_sub:   'Map your ADAS AI components to EU AI Act risk levels. High-risk systems require full Article 9–17 compliance. Lower-risk components still need minimal documentation.',
+        s02_alert:     'Under the Act, ',
+        s02_alert_all: 'all',
+        s02_alert2:    ' AI components that feed into safety-critical vehicle decisions are presumed high-risk unless explicitly scoped out. When in doubt, treat it as high-risk.',
+        th_component:   'ADAS Component',
+        th_aitype:      'AI Type',
+        th_risk:        'Risk Level',
+        th_obligations: 'Key Obligations',
+        th_articles:    'Article Refs',
+        /* Section 03 */
+        s03_label: 'Section 03',
+        s03_title: 'Documentation Requirements',
+        s03_sub:   'Article 11 + Annex IV define what must be documented. For ADAS teams, this means machine-readable, version-controlled artifacts — not static PDFs.',
+        cmp_title:   'What Teams Have vs. What Homologation Asks For',
+        cmp_sub:     'This is the gap most ADAS teams discover late. The left column reflects typical engineering artifacts; the right column shows what a notified body or authority will look for.',
+        cmp_have:    'What Teams Typically Have',
+        cmp_need:    'What Homologation Asks For',
+        cmp_divider: 'GAP ANALYSIS',
+        /* Section 04 */
+        s04_label:   'Section 04',
+        s04_title:   'Governance Checkpoints',
+        s04_sub:     'Embed compliance into your ADAS development stages.',
+        stage01_name: 'Concept',
+        stage01_sub:  'ODD &amp; Intent',
+        stage02_name: 'Design',
+        stage02_sub:  'Architecture &amp; Data',
+        stage03_name: 'Implementation',
+        stage03_sub:  'Training &amp; CI/CD',
+        stage04_name: 'Validation',
+        stage04_sub:  'V&amp;V Evidence',
+        stage05_name: 'Release',
+        stage05_sub:  'Conformity &amp; PMM',
+        /* Section 05 */
+        s05_label: 'Section 05',
+        s05_title: 'Compliance Tools &amp; Integrations',
+        /* Section 06 */
+        s06_label: 'Section 06',
+        s06_title: 'Training &amp; Roles (RACI)',
+        s06_sub:   'EU AI Act compliance is a team sport. The matrix below assigns Responsible, Accountable, Consulted, and Informed roles across key compliance activities.',
+        raci_activity: 'Compliance Activity',
+        raci_ml:     'ML Engineer',
+        raci_data:   'Data Engineer',
+        raci_sys:    'Systems Engineer',
+        raci_qa:     'QA / Test Engineer',
+        raci_safety: 'Functional Safety Lead',
+        raci_po:     'Product Owner',
+        raci_legal:  'Legal / Compliance',
+        raci_r: 'Responsible — does the work',
+        raci_a: 'Accountable — owns the outcome',
+        raci_c: 'Consulted — provides input',
+        raci_i: 'Informed — kept updated',
+        training_title: 'Recommended Training by Role',
+        /* Unlock section */
+        unlock_label:    'Ready to Comply?',
+        unlock_title:    'Unlock ',
+        unlock_title_em: 'Premium',
+        unlock_title2:   ' Playbook Access',
+        unlock_sub:      'Choose how you want to get started — instant access to full EU AI Act checklists, templates, and governance frameworks, or book a session to implement them with expert guidance.',
+        card1_title:   'Unlock Premium Playbook Access',
+        card1_body:    'Enter your work email to get instant access to the full EU AI Act checklists, templates, and governance frameworks — delivered directly to your inbox.',
+        card1_btn:     'Get Premium Access →',
+        card1_note:    'No spam. Unsubscribe anytime.',
+        card1_confirm: 'Check your inbox — access link on its way!',
+        card2_title:   'Upgrade to Premium',
+        card2_btn:     '💳 Buy Premium Playbook →',
+        card2_note:    'Secure checkout · Instant download after payment',
+        card3_title:   'Book a Strategy Session',
+        card3_body:    'Book a free 30-minute gap analysis session to map your ADAS team\'s EU AI Act obligations — tailored to your stack, timeline, and the August 2026 enforcement deadline.',
+        card3_btn:     '📅 Book a Session →',
+        card3_note:    'Free · No commitment required',
+        upgrade_note:  'Already have the free version?',
+        upgrade_link:  'Upgrade anytime for full access →',
+        upgrade_q:     'Questions?',
+        /* Download banner */
+        dl_title: 'Download the Free Playbook',
+        dl_body:  'This complete interactive HTML file — all 6 sections, risk table, RACI matrix, split comparison. Works offline. No sign-up required.',
+        dl_btn:   '↓ Download Free Version',
+        /* Footer */
+        footer_note:        'This playbook is a practitioner reference for ADAS development teams. It does not constitute legal advice. Always validate compliance obligations with qualified legal counsel and your notified body.',
+        footer_enforcement: 'enforcement of high-risk AI system obligations:',
+      },
+
+      de: {
+        /* Banner */
+        banner_label: 'Durchsetzungsfrist:',
+        banner_text:  'EU-KI-Gesetz für Hochrisiko-KI-Systeme — ',
+        banner_cta:   '. Ihr ADAS-Team braucht jetzt einen Compliance-Sprint.',
+        /* Nav */
+        nav_overview: 'Überblick',
+        nav_risk:     'Risikoklassifizierung',
+        nav_docs:     'Dokumentation',
+        nav_gov:      'Governance',
+        nav_tools:    'Tools',
+        nav_raci:     'Rollen &amp; RACI',
+        nav_premium:  'Premium freischalten',
+        /* Hero */
+        hero_title:  'KI-Governance-Playbook',
+        hero_title2: 'ADAS-Teams',
+        hero_date:   'Aktualisiert März 2026',
+        hero_sub:    'Ein praxistaugliches Compliance-Framework, das EU-KI-Gesetz-Anforderungen auf ADAS-Entwicklungsworkflows abbildet — vom Konzept-Gate bis zur Homologation. Kostenlos nutzbar. Premium-Vorlagen verfügbar.',
+        hero_cta1:   'Lesen beginnen ↓',
+        hero_cta2:   'Zum Workflow →',
+        stat1: 'Durchsetzung für Hochrisikosysteme',
+        stat2: 'Kernpflichten für ADAS',
+        stat3: 'Höchststrafe / 7 % des Weltumsatzes',
+        stat4: 'Empfohlener Sprint-Rhythmus',
+        /* Section 01 */
+        s01_label: 'Abschnitt 01',
+        s01_title: 'EU-KI-Gesetz Überblick',
+        s01_sub:   'Das EU-KI-Gesetz (Verordnung 2024/1689) ist der weltweit erste umfassende KI-Regulierungsrahmen. Für Entwickler von Fahrzeug-ADAS-Systemen führt es verbindliche Konformitätspflichten für Systeme ein, die als ',
+        s01_sub2:  'Hochrisiko-KI',
+        s01_sub2_after: ' eingestuft werden.',
+        s01_alert_title: 'ADAS-Teams sind direkt betroffen.',
+        s01_alert_body:  'Funktionen, die die Sicherheit beeinflussen können, werden als Hochrisiko-KI nach Anhang III (§ 3 – Verkehr) eingestuft. Dies erfordert Technische Unterlagen, QMS-Integration und Marktüberwachung.',
+        pillar1_title: 'Hochrisiko-Klassifizierung',
+        pillar1_body:  'ADAS-KI ist in Anhang III gelistet. Anbieter müssen Systeme in der EU-Datenbank registrieren und vor der Markteinführung eine Konformitätsbewertung durchführen.',
+        pillar2_title: 'Technische Dokumentation',
+        pillar2_body:  'Anhang IV schreibt umfassende Technische Unterlagen vor, die Systemdesign, Trainingsdaten, Validierungsmethodik und Leistungskennzahlen abdecken — versionskontrolliert.',
+        pillar3_title: 'Marktüberwachung',
+        pillar3_body:  'Artikel 72 verlangt kontinuierliche Überwachungspläne. Anbieter müssen Echtzeit-Leistungsdaten erheben, analysieren und schwerwiegende Vorfälle den Behörden melden.',
+        pillar4_title: 'Menschliche Aufsicht',
+        pillar4_body:  'Artikel 14 verlangt, dass Hochrisiko-KI menschliche Aufsicht ermöglicht. ADAS-Systeme müssen Übersteuerungsmöglichkeiten und interpretierbare Ausgaben für Fahreingriffe bieten.',
+        art_title: 'Wesentliche Artikel für ADAS-Teams',
+        art9:  'Risikomanagementsystem — dokumentierter, iterativer Prozess über den gesamten KI-Lebenszyklus.',
+        art10: 'Governance von Trainings-, Validierungs- und Testdaten. Datenqualität, Bias-Identifikation, Annotations-Rückverfolgbarkeit.',
+        art11: 'Technische Dokumentation — muss kontinuierlich aktualisiert und benannten Stellen auf Anfrage zur Verfügung gestellt werden.',
+        art12: 'Protokollierungspflichten: automatische Ereignisprotokolle, fälschungssicher, ausreichend zur Rückverfolgung des Systemverhaltens im Einsatz.',
+        art13: 'Transparenz und Informationsbereitstellung. Gebrauchsanweisungen müssen für nachgelagerte Betreiber verständlich sein.',
+        art15: 'Genauigkeit, Robustheit, Cybersicherheit. Systeme müssen gegenüber adversariellen Eingaben und Randfällen widerstandsfähig sein.',
+        art17: 'Qualitätsmanagementsystem (QMS)-Integration. Muss Design, Entwicklung, Test und After-Market-Phasen abdecken.',
+        readiness_title:  'Typischer Compliance-Reifegrad (Branchenbasislinie)',
+        r1: 'Risikomanagement-Dokumentation',
+        r2: 'Trainingsdaten-Rückverfolgbarkeit',
+        r3: 'Automatisiertes Logging (Art. 12)',
+        r4: 'QMS-Integration (Art. 17)',
+        r5: 'Mechanismen zur menschlichen Aufsicht',
+        r6: 'Vollständigkeit der Technischen Unterlagen',
+        readiness_source: 'Quelle: Schätzung auf Basis veröffentlichter Regulatory-Readiness-Umfragen, 2024–2025. Werte sind indikativ.',
+        /* Section 02 */
+        s02_label: 'Abschnitt 02',
+        s02_title: 'Risikoklassifizierung',
+        s02_sub:   'Ordnen Sie Ihre ADAS-KI-Komponenten den EU-KI-Gesetz-Risikoklassen zu. Hochrisikosysteme erfordern vollständige Compliance nach Artikel 9–17. Niedrigere Risikoklassen benötigen noch eine Mindestdokumentation.',
+        s02_alert:     'Nach dem Gesetz werden ',
+        s02_alert_all: 'alle',
+        s02_alert2:    ' KI-Komponenten, die in sicherheitskritische Fahrzeugentscheidungen einfließen, als Hochrisiko eingestuft, sofern sie nicht ausdrücklich ausgeschlossen sind. Im Zweifel als Hochrisiko behandeln.',
+        th_component:   'ADAS-Komponente',
+        th_aitype:      'KI-Typ',
+        th_risk:        'Risikoniveau',
+        th_obligations: 'Wesentliche Pflichten',
+        th_articles:    'Artikel-Referenzen',
+        /* Section 03 */
+        s03_label: 'Abschnitt 03',
+        s03_title: 'Dokumentationsanforderungen',
+        s03_sub:   'Artikel 11 + Anhang IV legen fest, was dokumentiert werden muss. Für ADAS-Teams bedeutet das maschinenlesbare, versionskontrollierte Artefakte — keine statischen PDFs.',
+        cmp_title:   'Was Teams haben vs. was die Homologation fordert',
+        cmp_sub:     'Diese Lücke entdecken die meisten ADAS-Teams zu spät. Die linke Spalte zeigt typische Engineering-Artefakte; die rechte Spalte zeigt, was eine benannte Stelle oder Behörde prüft.',
+        cmp_have:    'Was Teams typischerweise haben',
+        cmp_need:    'Was die Homologation fordert',
+        cmp_divider: 'LÜCKENANALYSE',
+        /* Section 04 */
+        s04_label:   'Abschnitt 04',
+        s04_title:   'Governance-Checkpoints',
+        s04_sub:     'Betten Sie Compliance in Ihre ADAS-Entwicklungsstufen ein.',
+        stage01_name: 'Konzept',
+        stage01_sub:  'ODD &amp; Zweck',
+        stage02_name: 'Design',
+        stage02_sub:  'Architektur &amp; Daten',
+        stage03_name: 'Implementierung',
+        stage03_sub:  'Training &amp; CI/CD',
+        stage04_name: 'Validierung',
+        stage04_sub:  'V&amp;V-Nachweise',
+        stage05_name: 'Freigabe',
+        stage05_sub:  'Konformität &amp; PMM',
+        /* Section 05 */
+        s05_label: 'Abschnitt 05',
+        s05_title: 'Compliance-Tools &amp; Integrationen',
+        /* Section 06 */
+        s06_label: 'Abschnitt 06',
+        s06_title: 'Schulung &amp; Rollen (RACI)',
+        s06_sub:   'EU-KI-Gesetz-Compliance ist Teamarbeit. Die folgende Matrix weist Verantwortliche, Entscheidungsträger, Berater und Informierte für zentrale Compliance-Aktivitäten zu.',
+        raci_activity: 'Compliance-Aktivität',
+        raci_ml:     'ML-Ingenieur',
+        raci_data:   'Dateningenieur',
+        raci_sys:    'Systemingenieur',
+        raci_qa:     'QA / Testingenieur',
+        raci_safety: 'Functional Safety Lead',
+        raci_po:     'Product Owner',
+        raci_legal:  'Recht / Compliance',
+        raci_r: 'Responsible — führt die Arbeit aus',
+        raci_a: 'Accountable — trägt die Verantwortung',
+        raci_c: 'Consulted — wird einbezogen',
+        raci_i: 'Informed — wird informiert',
+        training_title: 'Empfohlene Schulungen nach Rolle',
+        /* Unlock section */
+        unlock_label:    'Bereit für Compliance?',
+        unlock_title:    '',
+        unlock_title_em: 'Premium',
+        unlock_title2:   '-Playbook freischalten',
+        unlock_sub:      'Wählen Sie Ihren Einstieg — sofortiger Zugang zu vollständigen EU-KI-Gesetz-Checklisten, Vorlagen und Governance-Frameworks oder buchen Sie eine Session zur Umsetzung mit Expertenbegleitung.',
+        card1_title:   'Premium-Playbook-Zugang freischalten',
+        card1_body:    'Geben Sie Ihre Arbeits-E-Mail ein, um sofortigen Zugang zu den vollständigen EU-KI-Gesetz-Checklisten, Vorlagen und Governance-Frameworks zu erhalten.',
+        card1_btn:     'Premium-Zugang erhalten →',
+        card1_note:    'Kein Spam. Jederzeit abbestellbar.',
+        card1_confirm: 'Prüfen Sie Ihren Posteingang — Zuganglink ist unterwegs!',
+        card2_title:   'Auf Premium upgraden',
+        card2_btn:     '💳 Premium-Playbook kaufen →',
+        card2_note:    'Sicherer Checkout · Sofortiger Download nach Zahlung',
+        card3_title:   'Strategiesession buchen',
+        card3_body:    'Buchen Sie eine kostenlose 30-minütige Lückenanalyse-Session, um die EU-KI-Gesetz-Pflichten Ihres ADAS-Teams zu kartieren — abgestimmt auf Ihren Stack, Zeitplan und die Durchsetzungsfrist August 2026.',
+        card3_btn:     '📅 Session buchen →',
+        card3_note:    'Kostenlos · Keine Verpflichtung',
+        upgrade_note:  'Haben Sie bereits die kostenlose Version?',
+        upgrade_link:  'Jederzeit auf Vollzugang upgraden →',
+        upgrade_q:     'Fragen?',
+        /* Download banner */
+        dl_title: 'Kostenloses Playbook herunterladen',
+        dl_body:  'Diese vollständige interaktive HTML-Datei — alle 6 Abschnitte, Risikoklassifizierungstabelle, RACI-Matrix, Lückenanalyse. Funktioniert offline. Keine Anmeldung erforderlich.',
+        dl_btn:   '↓ Kostenlose Version herunterladen',
+        /* Footer */
+        footer_note:        'Dieses Playbook ist eine Praxisreferenz für ADAS-Entwicklungsteams. Es stellt keine Rechtsberatung dar. Validieren Sie Compliance-Pflichten stets mit qualifiziertem Rechtsbeistand und Ihrer benannten Stelle.',
+        footer_enforcement: 'Durchsetzung der Pflichten für Hochrisiko-KI-Systeme:',
+      }
+    };
+
+    var currentLang = 'en';
+
+    function setLang(lang) {
+      if (lang === currentLang) return;
+      currentLang = lang;
+
+      var t = TRANSLATIONS[lang];
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) {
+          el.innerHTML = t[key];
+        }
+      });
+
+      /* Update <html lang> attribute */
+      document.documentElement.lang = lang;
+
+      /* Update active button state */
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+
+      /* Persist preference */
+      try { localStorage.setItem('playbook_lang', lang); } catch(e) {}
+    }
+
+    /* Restore saved preference on load */
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var saved = localStorage.getItem('playbook_lang');
+        if (saved && saved !== 'en') setLang(saved);
+      } catch(e) {}
     });
 
     /* ─────────────────────────────────────────────
