@@ -960,6 +960,269 @@
     }
     .lang-btn:hover:not(.active) { color: var(--blue); }
 
+
+    /* ══════════════════════════════════════════════
+       PRINT / SAVE AS PDF  styles
+    ══════════════════════════════════════════════ */
+    @media print {
+      /* Hide interactive chrome */
+      #topnav,
+      .deadline-banner,
+      .lang-toggle,
+      .free-download-banner,
+      .premium-overlay,
+      .premium-header-strip,
+      .flow-stages,
+      .placeholder-img,
+      .hero-cta,
+      .btn, .btn-gold, .btn-download,
+      .nav-premium-pill,
+      #unlock { display: none !important; }
+
+      /* Reset background to white */
+      body, .section, .card, .doc-req-card,
+      .pillar-card, .compare-wrap, .risk-table,
+      .tool-category-card, .raci-table-wrap,
+      .stage-panel { background: #fff !important; box-shadow: none !important; }
+
+      /* Remove blur on gated content */
+      .premium-content { filter: none !important; user-select: auto !important; }
+
+      /* Clean typography */
+      body { font-size: 11pt; color: #000; }
+      h1 { font-size: 22pt; }
+      h2 { font-size: 16pt; page-break-after: avoid; }
+      h3 { font-size: 13pt; page-break-after: avoid; }
+      h4 { font-size: 11pt; page-break-after: avoid; }
+
+      /* Avoid orphaned headings */
+      .section-head, .doc-req-card, .pillar-card,
+      .tl-item, .checkpoint-item, .tool-entry { page-break-inside: avoid; }
+
+      /* Ensure all tool sections show */
+      .tool-body { display: block !important; }
+
+      /* Show all stage panels */
+      .stage-panel { display: block !important; opacity: 1 !important; }
+
+      /* Remove stage-locked blur */
+      .stage-locked, .stage-lock-icon { display: none !important; }
+
+      /* Full-width layout */
+      .container { max-width: 100% !important; padding: 0 12px !important; }
+
+      /* Page break hints */
+      #overview { page-break-before: always; }
+      #risk      { page-break-before: always; }
+      #docs      { page-break-before: always; }
+      #governance{ page-break-before: always; }
+      #tools     { page-break-before: always; }
+      #raci      { page-break-before: always; }
+
+      /* Minimal hero for PDF cover */
+      #hero { padding: 24px 0 16px; }
+      .hero-stats { display: none; }
+      .hero-eyebrow { margin-bottom: 8px; }
+
+      /* Readable table */
+      .risk-table th, .risk-table td { font-size: 9pt; padding: 6px 8px; }
+      .raci-table th, .raci-table td { font-size: 9pt; padding: 4px 6px; }
+
+      /* URLs for links */
+      a[href]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #666; }
+      a[href^="#"]::after { content: ""; }
+      nav a::after, .nav-links a::after { content: "" !important; }
+    }
+
+
+    /* ══════════════════════════════════════════════
+       PRINT / PDF STYLESHEET
+    ══════════════════════════════════════════════ */
+    @media print {
+      /* Hide non-content elements */
+      #topnav,
+      .deadline-banner,
+      .hero-cta,
+      .free-download-banner,
+      .premium-overlay,
+      .premium-header-strip,
+      #unlock,
+      .lang-toggle,
+      .nav-premium-pill,
+      .btn-gold,
+      .btn-download,
+      .btn-primary,
+      .btn-ghost,
+      .flow-stages,
+      .placeholder-img { display: none !important; }
+
+      /* Base reset for print */
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body {
+        font-size: 11pt;
+        background: #fff !important;
+        color: #000 !important;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Page setup */
+      @page {
+        size: A4;
+        margin: 18mm 18mm 20mm 18mm;
+      }
+      @page :first {
+        margin-top: 12mm;
+      }
+
+      /* Sections */
+      .section { padding: 16pt 0; page-break-inside: avoid; }
+      .container { max-width: 100% !important; padding: 0 !important; }
+
+      /* Hero */
+      #hero {
+        background: #1a1f2e !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 24pt 24pt 20pt !important;
+        border-radius: 0;
+        page-break-after: avoid;
+      }
+      #hero h1, #hero p, #hero .stat-num, #hero .stat-label,
+      #hero .hero-eyebrow span { color: #fff !important; }
+      .hero-stats { display: flex; gap: 16pt; margin-top: 12pt; }
+      .stat-item { text-align: center; flex: 1; }
+      .stat-num { font-size: 18pt; font-weight: 800; }
+
+      /* Headings */
+      h1 { font-size: 22pt; }
+      h2 { font-size: 16pt; margin-bottom: 8pt; }
+      h3 { font-size: 13pt; }
+      h4 { font-size: 11pt; }
+
+      /* Section labels */
+      .label {
+        font-size: 8pt;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #666 !important;
+        margin-bottom: 4pt;
+      }
+
+      /* Cards and grids */
+      .pillar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+      .pillar-card {
+        border: 1pt solid #e0e0e0;
+        border-radius: 6pt;
+        padding: 10pt;
+        background: #fff !important;
+        page-break-inside: avoid;
+      }
+      .pillar-card.blue { border-left: 3pt solid #1a6ef5 !important; }
+      .pillar-card.red  { border-left: 3pt solid #dc2626 !important; }
+      .pillar-card.green { border-left: 3pt solid #1ca96a !important; }
+      .pillar-card.amber { border-left: 3pt solid #d97706 !important; }
+      .pillar-icon { display: none; }
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+
+      /* Timeline */
+      .timeline { border-left: 2pt solid #1a6ef5; padding-left: 10pt; }
+      .tl-item { margin-bottom: 8pt; page-break-inside: avoid; }
+      .tl-tag {
+        background: #1a6ef5 !important;
+        color: #fff !important;
+        font-size: 8pt;
+        padding: 2pt 6pt;
+        border-radius: 3pt;
+        display: inline-block;
+        margin-bottom: 2pt;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Risk table */
+      .risk-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+      .risk-table th {
+        background: #1a1f2e !important;
+        color: #fff !important;
+        padding: 5pt 6pt;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .risk-table td { padding: 5pt 6pt; border-bottom: 0.5pt solid #ddd; }
+      .row-critical td { background: #fff5f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .row-high td { background: #fffbeb !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .row-medium td { background: #fefce8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .risk-level { font-size: 8pt; }
+
+      /* Doc cards */
+      .doc-req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+      .doc-req-card { border: 1pt solid #e0e0e0; border-radius: 6pt; page-break-inside: avoid; }
+      .doc-req-header { padding: 8pt; font-size: 10pt; }
+      .doc-req-body ul { padding-left: 12pt; font-size: 9pt; }
+      .doc-req-body li { margin-bottom: 2pt; }
+
+      /* Compare section */
+      .compare-wrap { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8pt; }
+      .compare-col { border: 1pt solid #e0e0e0; padding: 8pt; border-radius: 6pt; }
+      .compare-divider { writing-mode: vertical-rl; font-size: 8pt; color: #666; align-self: center; }
+
+      /* Governance checkpoints */
+      .flow-panel { display: block !important; page-break-inside: avoid; margin-bottom: 12pt; }
+      .checkpoint-item { border: 0.5pt solid #e0e0e0; padding: 8pt; margin-bottom: 6pt; border-radius: 4pt; page-break-inside: avoid; }
+      .cp-title { font-weight: 700; font-size: 10pt; margin-bottom: 3pt; }
+      .cp-body { font-size: 9pt; color: #444; }
+      .gate-crit { background: #f0f9ff !important; border-left: 3pt solid #1a6ef5 !important; padding: 6pt 8pt; margin-top: 8pt; font-size: 9pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pitfall-box { background: #fff8e1 !important; border-left: 3pt solid #d97706 !important; padding: 6pt 8pt; margin-top: 8pt; font-size: 9pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* RACI */
+      .raci-table { width: 100%; border-collapse: collapse; font-size: 8pt; }
+      .raci-table th { background: #1a1f2e !important; color: #fff !important; padding: 4pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .raci-table td { padding: 4pt; border: 0.5pt solid #ddd; text-align: center; }
+
+      /* Tools */
+      .tool-section { border: 0.5pt solid #e0e0e0; border-radius: 6pt; margin-bottom: 8pt; padding: 8pt; page-break-inside: avoid; }
+      .tool-entry { margin-bottom: 6pt; padding-bottom: 6pt; border-bottom: 0.5pt solid #f0f0f0; }
+
+      /* Chips, badges */
+      .chip { border: 0.5pt solid #ccc; padding: 1pt 4pt; border-radius: 3pt; font-size: 7.5pt; }
+      .tier-badge { font-size: 7.5pt; border: 0.5pt solid; border-radius: 3pt; padding: 1pt 5pt; }
+      .tier-free { color: #1ca96a; border-color: #1ca96a; }
+      .tier-premium { color: #d97706; border-color: #d97706; }
+
+      /* Alerts */
+      .alert { border: 1pt solid #e0e0e0; padding: 8pt; border-radius: 4pt; margin-bottom: 8pt; font-size: 9.5pt; page-break-inside: avoid; }
+      .alert-warn { border-color: #d97706; background: #fff8e1 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .alert-info { border-color: #1a6ef5; background: #e8f0ff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* Page breaks */
+      #overview  { page-break-before: avoid; }
+      #risk      { page-break-before: always; }
+      #docs      { page-break-before: always; }
+      #governance { page-break-before: always; }
+      #tools     { page-break-before: always; }
+      #raci      { page-break-before: always; }
+
+      /* Links - show URLs */
+      a[href]:after { content: none; }
+
+      /* Readiness bars */
+      .progress-bar { background: #eee !important; height: 6pt; border-radius: 3pt; margin-top: 3pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .progress-fill { height: 100%; border-radius: 3pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pf-amber { background: #d97706 !important; }
+      .pf-red   { background: #dc2626 !important; }
+      .pf-green { background: #1ca96a !important; }
+
+      /* Premium content - show blurred content for print */
+      .premium-gate { border: 1pt dashed #ccc; padding: 8pt; border-radius: 6pt; }
+      .premium-content { filter: none !important; opacity: 1 !important; }
+
+      /* Footer */
+      footer { font-size: 8pt; color: #666; border-top: 0.5pt solid #e0e0e0; padding-top: 8pt; margin-top: 16pt; }
+    }
+
   </style>
 </head>
 <body>
@@ -2145,7 +2408,7 @@
           <p><span data-i18n="dl_body">This complete interactive HTML file — all 6 sections, risk table, RACI matrix, split comparison. Works offline. No sign-up required.</span></p>
         </div>
         <div class="fdb-right">
-          <button class="btn-download" onclick="downloadPlaybook()" style="white-space:nowrap;"><span data-i18n="dl_btn">↓ Download Free Version</span></button>
+          <button class="btn-download" onclick="downloadPlaybook()" style="white-space:nowrap;"><span data-i18n="dl_btn">⬇ Save as PDF</span></button>
           <p style="font-size:.74rem; color:var(--ink-muted); margin-top:8px; text-align:center;">
             Share: <a href="https://lxdadvisory.de" target="_blank" rel="noopener" style="color:var(--blue); font-family:var(--font-mono); font-size:.74rem;">keithan-c.github.io/Playbook</a>
           </p>
@@ -2596,9 +2859,9 @@
         upgrade_link:  'Upgrade anytime for full access →',
         upgrade_q:     'Questions?',
         /* Download banner */
-        dl_title: 'Download the Free Playbook',
-        dl_body:  'This complete interactive HTML file — all 6 sections, risk table, RACI matrix, split comparison. Works offline. No sign-up required.',
-        dl_btn:   '↓ Download Free Version',
+        dl_title: 'Save Playbook as PDF',
+        dl_body:  'Print to PDF from your browser — all 6 sections, risk table, RACI matrix, gap analysis. No sign-up required.',
+        dl_btn:   '⬇ Save as PDF',
         /* Footer */
         footer_note:        'This playbook is a practitioner reference for ADAS development teams. It does not constitute legal advice. Always validate compliance obligations with qualified legal counsel and your notified body.',
         footer_enforcement: 'enforcement of high-risk AI system obligations:',
@@ -2787,9 +3050,9 @@
         upgrade_link:  'Jederzeit auf Vollzugang upgraden →',
         upgrade_q:     'Fragen?',
         /* Download banner */
-        dl_title: 'Kostenloses Playbook herunterladen',
-        dl_body:  'Diese vollständige interaktive HTML-Datei — alle 6 Abschnitte, Risikoklassifizierungstabelle, RACI-Matrix, Lückenanalyse. Funktioniert offline. Keine Anmeldung erforderlich.',
-        dl_btn:   '↓ Kostenlose Version herunterladen',
+        dl_title: 'Playbook als PDF speichern',
+        dl_body:  'Browser-Druckdialog öffnet sich — alle 6 Abschnitte, Risikoklassifizierungstabelle, RACI-Matrix, Lückenanalyse. Keine Anmeldung erforderlich.',
+        dl_btn:   '⬇ Als PDF speichern',
         /* Footer */
         footer_note:        'Dieses Playbook ist eine Praxisreferenz für ADAS-Entwicklungsteams. Es stellt keine Rechtsberatung dar. Validieren Sie Compliance-Pflichten stets mit qualifiziertem Rechtsbeistand und Ihrer benannten Stelle.',
         footer_enforcement: 'Durchsetzung der Pflichten für Hochrisiko-KI-Systeme:',
@@ -2886,17 +3149,37 @@
        browser download — works locally and on GitHub Pages
     ───────────────────────────────────────────── */
     function downloadPlaybook() {
-      var html    = document.documentElement.outerHTML;
-      var blob    = new Blob(['<!DOCTYPE html>\n' + html], { type: 'text/html' });
-      var url     = URL.createObjectURL(blob);
-      var link    = document.createElement('a');
-      link.href       = url;
-      link.download   = 'ai-governance-playbook-adas-eu-ai-act.html';
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      /* Expand collapsed tool sections */
+      document.querySelectorAll('.tool-body').forEach(function(el) {
+        el._wasHidden = (el.style.display === 'none' || el.style.display === '');
+        el.style.display = 'block';
+      });
+      /* Temporarily hide premium overlays so content prints */
+      document.querySelectorAll('.premium-overlay').forEach(function(el) {
+        el._origDisplay = el.style.display;
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.premium-content').forEach(function(el) {
+        el._origFilter = el.style.filter;
+        el.style.filter = 'none';
+        el.style.userSelect = 'auto';
+      });
+
+      window.print();
+
+      /* Restore UI after print dialog closes */
+      setTimeout(function() {
+        document.querySelectorAll('.tool-body').forEach(function(el) {
+          if (el._wasHidden) el.style.display = '';
+        });
+        document.querySelectorAll('.premium-overlay').forEach(function(el) {
+          el.style.display = el._origDisplay || '';
+        });
+        document.querySelectorAll('.premium-content').forEach(function(el) {
+          el.style.filter = el._origFilter || '';
+          el.style.userSelect = '';
+        });
+      }, 3000);
     }
 
   </script>
